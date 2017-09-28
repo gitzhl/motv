@@ -1,15 +1,19 @@
 package com.youzitech.motv;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.youzitech.motv.fragment.TvCatFragment;
+import com.youzitech.motv.fragment.TvSettingsFragment;
+import com.youzitech.motv.fragment.TvStarFragment;
 
-    private TextView mTextMessage;
+public class MainActivity extends Activity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -18,13 +22,25 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_tv:
-                    mTextMessage.setText(R.string.title_tv);
+                    TvCatFragment tvCatFragment = new TvCatFragment();
+                    android.app.FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transition = manager.beginTransaction();
+                    transition.replace(R.id.fragment_cat,tvCatFragment);
+                    transition.commit();
                     return true;
                 case R.id.navigation_star:
-                    mTextMessage.setText(R.string.title_star);
+                    TvStarFragment tvStarFragment = new TvStarFragment();
+                    android.app.FragmentManager starManager = getFragmentManager();
+                    FragmentTransaction starTransition = starManager.beginTransaction();
+                    starTransition.replace(R.id.fragment_cat,tvStarFragment);
+                    starTransition.commit();
                     return true;
                 case R.id.navigation_settings:
-                    mTextMessage.setText(R.string.title_settings);
+                    TvSettingsFragment tvSettingsFragment = new TvSettingsFragment();
+                    android.app.FragmentManager settingsManager = getFragmentManager();
+                    FragmentTransaction settingsTransition = settingsManager.beginTransaction();
+                    settingsTransition.replace(R.id.fragment_cat,tvSettingsFragment);
+                    settingsTransition.commit();
                     return true;
             }
             return false;
@@ -37,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        TvCatFragment tvCatFragment = new TvCatFragment();
+        android.app.FragmentManager manager = getFragmentManager();
+        FragmentTransaction transition = manager.beginTransaction();
+        transition.replace(R.id.fragment_cat,tvCatFragment);
+        transition.commit();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
