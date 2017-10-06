@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.youzitech.motv.R;
 import com.youzitech.motv.fragment.TvCatFragment;
+import com.youzitech.motv.fragment.TvRecentFragment;
 import com.youzitech.motv.fragment.TvSettingsFragment;
 import com.youzitech.motv.fragment.TvStarFragment;
 
@@ -37,6 +38,7 @@ public abstract  class SingleFragmentActivity extends FragmentActivity {
         }
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
@@ -55,6 +57,19 @@ public abstract  class SingleFragmentActivity extends FragmentActivity {
                                 .commit();
                     }else{
                         fragment =  new TvCatFragment();
+                        fm.beginTransaction()
+                                .replace(R.id.fragment_container,fragment)
+                                .commit();
+                    }
+                    return true;
+                case R.id.navigation_recent:
+                    if(null == fragment){
+                        fragment =  new TvRecentFragment();
+                        fm.beginTransaction()
+                                .add(R.id.fragment_container,fragment)
+                                .commit();
+                    }else{
+                        fragment =  new TvRecentFragment();
                         fm.beginTransaction()
                                 .replace(R.id.fragment_container,fragment)
                                 .commit();

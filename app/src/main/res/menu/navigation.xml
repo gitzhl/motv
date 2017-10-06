@@ -7,6 +7,11 @@
         android:title="@string/title_tv" />
 
     <item
+        android:id="@+id/navigation_recent"
+        android:icon="@drawable/ic_more_horiz_black_48dp"
+        android:title="@string/title_recent" />
+
+    <item
         android:id="@+id/navigation_star"
         android:icon="@drawable/ic_star_black_48dp"
         android:title="@string/title_star" />

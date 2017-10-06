@@ -1,6 +1,7 @@
 package com.youzitech.motv.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,15 @@ public class TvCatFragment extends Fragment {
 
     private RecyclerView mTvCatView;
 
+    private List<TvCategory> tvCateList;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        tvCateList = getTvCatList();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -33,10 +43,10 @@ public class TvCatFragment extends Fragment {
 
         mTvCatView = (RecyclerView) view.findViewById(R.id.tvCat_view);
         mTvCatView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        List<TvCategory> tvCateList = getTvCatList();
         mTvCatView.setAdapter(new TvCatAdapter(tvCateList));
         return view;
     }
+
 
     public static List<TvCategory> getTvCatList(){
         List<TvCategory> tv = new ArrayList<>();
