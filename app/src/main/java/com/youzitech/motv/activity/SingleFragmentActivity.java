@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
 
 import com.youzitech.motv.R;
+import com.youzitech.motv.fragment.TvCatFragment;
+import com.youzitech.motv.fragment.TvSettingsFragment;
+import com.youzitech.motv.fragment.TvStarFragment;
 
 /**
  * Created by Administrator on 2017/10/6 0006.
@@ -41,15 +44,47 @@ public abstract  class SingleFragmentActivity extends FragmentActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentById(R.id.fragment_container);
             switch (item.getItemId()) {
                 case R.id.navigation_tv:
-                    MainActivity.newIntent(SingleFragmentActivity.this);
+                    if(null == fragment){
+                        fragment =  new TvCatFragment();
+                        fm.beginTransaction()
+                                .add(R.id.fragment_container,fragment)
+                                .commit();
+                    }else{
+                        fragment =  new TvCatFragment();
+                        fm.beginTransaction()
+                                .replace(R.id.fragment_container,fragment)
+                                .commit();
+                    }
                     return true;
                 case R.id.navigation_star:
-                    TvStarActivity.newIntent(SingleFragmentActivity.this);
+                    if(null == fragment){
+                        fragment =  new TvStarFragment();
+                        fm.beginTransaction()
+                                .add(R.id.fragment_container,fragment)
+                                .commit();
+                    }else{
+                        fragment =  new TvStarFragment();
+                        fm.beginTransaction()
+                                .replace(R.id.fragment_container,fragment)
+                                .commit();
+                    }
                     return true;
                 case R.id.navigation_settings:
-                    TvSettingActivity.newIntent(SingleFragmentActivity.this);
+                    if(null == fragment){
+                        fragment =  new TvSettingsFragment();
+                        fm.beginTransaction()
+                                .add(R.id.fragment_container,fragment)
+                                .commit();
+                    }else{
+                        fragment =  new TvSettingsFragment();
+                        fm.beginTransaction()
+                                .replace(R.id.fragment_container,fragment)
+                                .commit();
+                    }
                     return true;
             }
             return false;
