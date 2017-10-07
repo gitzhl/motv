@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.WelcomeAdActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.TvStarActivity"></activity>
-        <activity android:name=".activity.TvSettingActivity"></activity>
+        <activity android:name=".activity.TvCatActivity" />
+        <activity android:name=".activity.TvRecentActivity" />
+        <activity android:name=".activity.TvStarActivity" />
+        <activity android:name=".activity.TvSettingActivity" />
     </application>
 
 </manifest>

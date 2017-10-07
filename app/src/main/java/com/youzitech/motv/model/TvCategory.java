@@ -6,17 +6,44 @@ package com.youzitech.motv.model;
 
 public class TvCategory {
 
-    public String getTitle() {
-        return title;
+    private long id;
+    private String categoryName;
+    private int type;
+    private long ownerId;
+
+    public TvCategory(String categoryName){
+        this.categoryName = categoryName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public long getId() {
+        return id;
     }
 
-    private String title;
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public TvCategory(String title){
-        this.title = title;
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 }

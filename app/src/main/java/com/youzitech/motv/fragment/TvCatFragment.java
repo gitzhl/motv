@@ -1,11 +1,11 @@
 package com.youzitech.motv.fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +27,12 @@ public class TvCatFragment extends Fragment {
 
     private RecyclerView mTvCatView;
 
+
     private List<TvCategory> tvCateList;
 
+    private TvCatAdapter adapter;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    private void initData(){
         tvCateList = getTvCatList();
     }
 
@@ -43,7 +43,11 @@ public class TvCatFragment extends Fragment {
 
         mTvCatView = (RecyclerView) view.findViewById(R.id.tvCat_view);
         mTvCatView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mTvCatView.setAdapter(new TvCatAdapter(tvCateList));
+        mTvCatView.addItemDecoration(new RecyclerView.ItemDecoration() {
+        });
+        tvCateList = getTvCatList();
+        adapter = new TvCatAdapter(tvCateList);
+        mTvCatView.setAdapter(adapter);
         return view;
     }
 
@@ -52,49 +56,57 @@ public class TvCatFragment extends Fragment {
         List<TvCategory> tv = new ArrayList<>();
         tv.add(new TvCategory("title1"));
         tv.add(new TvCategory("title2"));
+        tv.add(new TvCategory("title3"));
+        tv.add(new TvCategory("title4"));
+        tv.add(new TvCategory("title5"));
+        tv.add(new TvCategory("title6"));
+        tv.add(new TvCategory("title7"));
+        tv.add(new TvCategory("title8"));
         return tv;
+    }
+
+    public static List<String> getListViewData(){
+       List<String> data = new ArrayList<>();
+        data.add("title1");
+        data.add("title2");
+        data.add("title3");
+        return data;
     }
 
     private class TvCatHolder extends  RecyclerView.ViewHolder{
 
         private TextView textView;
 
-        private TvCategory tvCategory;
-
-        public TvCatHolder(LayoutInflater inflater,ViewGroup container) {
-            super(inflater.inflate(R.layout.tvcat_item,container,false));
-            textView = (TextView) itemView.findViewById(R.id.tvCat_view);
-        }
-
-        public void bindTvCategory(TvCategory category){
-            this.tvCategory = category;
-            textView.setText(tvCategory.getTitle());
+        public TvCatHolder(View itemView) {
+            super(itemView);
+            textView = (TextView) itemView;
         }
     }
 
     private class TvCatAdapter extends  RecyclerView.Adapter<TvCatHolder>{
 
 
-        private List<TvCategory> tvCategories;
+        private List<TvCategory> mTvCategories;
 
         public TvCatAdapter(List<TvCategory> tvCategories){
-            tvCategories = tvCategories;
+            mTvCategories = tvCategories;
         }
         @Override
         public TvCatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            return new TvCatHolder(inflater,parent);
+            View view = inflater.inflate(android.R.layout.simple_list_item_1,parent,false);
+            return new TvCatHolder(view);
         }
 
         @Override
         public void onBindViewHolder(TvCatHolder holder, int position) {
-            TvCategory category = tvCategories.get(position);
-            holder.bindTvCategory(category);
+            TvCategory category = mTvCategories.get(position);
+            holder.textView.setText(category.getCategoryName());
         }
 
         @Override
         public int getItemCount() {
-            return null == tvCategories?0:tvCategories.size();
+            return mTvCategories.size();
         }
     }
 }
